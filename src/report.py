@@ -1,4 +1,5 @@
 import csv
+import json
 import matplotlib.pyplot as plt
 import geopandas as gpd
 import contextily as ctx
@@ -54,30 +55,20 @@ class Report:
 
         print(f"\nCSV report exported successfully: {filename}")
 
-    def export_txt(self, filename="affected_parcels_report.txt"):
+    def export_json(self, filename="affected_parcels_report.json"):
         if not self.results:
             print("No affected parcels to export.")
             return
 
-        with open(filename, "w", encoding="utf-8") as txtfile:
-            txtfile.write("=== AFFECTED PARCELS REPORT ===\n\n")
+        with open(filename, "w", encoding="utf-8") as jsonfile:
+            json.dump(
+                self.results,
+                jsonfile,
+                indent=4,
+                ensure_ascii=False
+            )
 
-            for r in self.results:
-                txtfile.write(f"Lot Number: {r['parcel_id']}\n")
-                txtfile.write(f"Owner: {r['owner']}\n")
-                txtfile.write(f"Parcel Area: {r['parcel_area']:.2f}\n")
-                txtfile.write(f"Overlap Area: {r['overlap_area']:.2f}\n")
-                txtfile.write(f"Distance from Line: {r['distance']:.2f} m\n")
-                txtfile.write(f"Building Present: {r['building_present']}\n")
-                txtfile.write(f"Risk Level: {r['risk']}\n")
-                txtfile.write(
-                    f"Location: {r['barangay']}, "
-                    f"{r['municipality']}, "
-                    f"{r['province']}\n"
-                )
-                txtfile.write("----------------------------------------\n")
-
-        print(f"TXT report exported successfully: {filename}")
+        print(f"JSON report exported successfully: {filename}")
 
     def export_map(self, parcels, easements, buildings=None, filename="affected_parcels_map.png"):
         if not self.results:

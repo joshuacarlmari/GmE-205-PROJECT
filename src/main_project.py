@@ -9,6 +9,7 @@ import json
 import os
 
 
+
 def load_json(file_path):
     with open(file_path, "r", encoding="utf-8-sig") as f:
         return json.load(f)
@@ -120,7 +121,7 @@ def load_buildings(file_path):
 
 
 def main():
-    parcels = load_parcels("data/parcels2.json")
+    parcels = load_parcels("data/parcels.json")
 
     if not parcels:
         print("No parcels loaded.")
@@ -170,8 +171,8 @@ def main():
         "output/affected_parcels_report.csv"
     )
 
-    report.export_txt(
-        "output/affected_parcels_report.txt"
+    report.export_json(
+        "output/affected_parcels_report.json"
     )
 
     report.export_map(
