@@ -3,10 +3,22 @@ from report import Report
 
 class RiskAnalyzer:
     def assess_risk(self, overlap_area, distance, voltage_kv, has_structure):
+
+        # Direct overlap with easement corridor
+        if overlap_area > 0:
+            return "HIGH"
+
+        # High Restriction Zone: 0–30 m from transmission line
         if distance <= 30:
             return "HIGH"
-        elif distance <= 100:
+
+        # Moderate Restriction Zone: 30–100 m from transmission line
+        if distance <= 100:
+            if has_structure:
+                return "HIGH"
             return "MODERATE"
+
+        # Beyond 100 m
         return "LOW"
 
 

@@ -88,3 +88,6 @@ class TransmissionLineEasement(SpatialObject):
             f"Transmission line {self.line_id} with {self.voltage_kv} kV "
             f"and easement width of {self.width_m} meters."
         )
+    
+
+    

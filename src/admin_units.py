@@ -27,3 +27,7 @@ class Barangay:
 
     def add_parcel(self, parcel):
         self.parcels.append(parcel)
+
+
+
+        
