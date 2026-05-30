@@ -1,44 +1,39 @@
-from abc import ABC, abstractmethod
-
-
-class SpatialObject(ABC):
+class SpatialObject:
     def __init__(self, geometry):
         self.geometry = geometry
 
-    @property
     def area(self):
         return self.geometry.area
 
-    @property
     def length(self):
         return self.geometry.length
 
     def intersects(self, other):
         if isinstance(other, SpatialObject):
             return self.geometry.intersects(other.geometry)
+
         return self.geometry.intersects(other)
 
     def intersection(self, other):
         if isinstance(other, SpatialObject):
             return self.geometry.intersection(other.geometry)
+
         return self.geometry.intersection(other)
 
     def distance(self, other):
         if isinstance(other, SpatialObject):
             return self.geometry.distance(other.geometry)
+
         return self.geometry.distance(other)
 
-    @abstractmethod
     def get_id(self):
-        pass
+        raise NotImplementedError("Subclasses must implement get_id()")
 
-    @abstractmethod
     def get_type(self):
-        pass
+        raise NotImplementedError("Subclasses must implement get_type()")
 
-    @abstractmethod
     def describe(self):
-        pass
+        raise NotImplementedError("Subclasses must implement describe()")
 
 
 class Parcel(SpatialObject):
@@ -47,6 +42,7 @@ class Parcel(SpatialObject):
         self.lot_no = lot_no
         self.owner = owner
         self.barangay = barangay
+
         barangay.add_parcel(self)
 
     def cadastral_id(self):
@@ -58,7 +54,7 @@ class Parcel(SpatialObject):
         )
 
     def get_id(self):
-        return self.cadastral_id()
+        return self.lot_no
 
     def get_type(self):
         return "Parcel"
@@ -67,7 +63,7 @@ class Parcel(SpatialObject):
         return (
             f"Parcel {self.lot_no} owned by {self.owner}, "
             f"located in {self.barangay.name}, "
-            f"with an area of {self.area:.2f} sq.m."
+            f"with an area of {self.area():.2f} sq.m."
         )
 
 

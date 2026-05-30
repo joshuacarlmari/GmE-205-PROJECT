@@ -51,7 +51,7 @@ class EasementChecker:
                     results.append({
                         "parcel_id": parcel.get_id(),
                         "owner": parcel.owner,
-                        "parcel_area": round(parcel.area, 2),
+                        "parcel_area": round(parcel.area(), 2),
                         "overlap_area": round(overlap_area, 2),
                         "distance": round(distance, 2),
                         "building_present": has_structure,
