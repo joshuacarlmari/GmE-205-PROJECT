@@ -5,7 +5,7 @@
     {
       "type": "Feature",
       "properties": {
-        "line_id": "TL-01",
+        "line_id": "San Vicente-Taytay Transmission Line",
         "width_m": 10,
         "voltage_kv": 230,
         "owner": "NAPOCOR"
