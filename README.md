@@ -12,3 +12,11 @@
 ### CSV and JSON report generation
 ### Automated risk map visualization
 ### Object-oriented design using encapsulation, inheritance, abstraction, and polymorphism
+
+## Technologies Used
+Python
+Shapely
+GeoPandas
+Matplotlib
+Contextily
+GeoJSON
